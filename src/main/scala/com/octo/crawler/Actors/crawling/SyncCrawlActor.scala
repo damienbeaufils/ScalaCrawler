@@ -28,7 +28,7 @@ class SyncCrawlActor(retryNumberOnError: Int, httpBasicAuthLogin: String, httpBa
         executeRequest(url, remainingDepth, refererUrl, retry - 1)
       }
       case e: Exception => {
-        println( s"""HTTP request error on ${url} with ${e}""")
+        println( s"""HTTP request error on ${url} with ${e} - ${e.getStackTrace.mkString("\n")}""")
         aggregator ! new ExposeThisPageResponse(-1, "", remainingDepth, url, refererUrl, urlProperties)
       }
     }
